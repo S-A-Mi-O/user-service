@@ -10,7 +10,7 @@ spring:
     consumer:
       auto-offset-reset: earliest
   datasource:
-    url: jdbc:postgresql://postgresql_user-service:5432/UserServiceDB
+    url: jdbc:postgresql://postgresql_user-service:5432/userservicedb
     username: username
     password: password
   jpa:
@@ -44,7 +44,7 @@ eureka:
   client:
     enabled: true
     service-url:
-      defaultZone: http://eureka-service:8761/eureka/
+      defaultZone: http://discovery-service:8761/eureka/
 
 cache:
   memory:
