@@ -1,0 +1,70 @@
+server:
+  port: 8081
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: user-service
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      auto-offset-reset: earliest
+  datasource:
+    url: jdbc:postgresql://postgresql_user-service:5432/UserServiceDB
+    username: username
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+      types:
+        registration: hypersistence-utils
+        json-dialect: true
+    show-sql: false
+    properties:
+      '[hypersistence.utils.enable_types_contributor]': false
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  docker:
+    compose:
+      enabled: false
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans, health
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
+
+cache:
+  memory:
+    maxSize: 1000000000
+
+logging:
+  level:
+    org.springframework.data: Info
+    org.springframework.context.annotation: WARN
+    org.springframework.boot.autoconfigure: WARN
+    org.apache.kafka: WARN
+
+pseudo-properties: true
+
+permissions: true
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+    display-request-duration: true
+  api-docs:
+    path: /v3/api-docs
